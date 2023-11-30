@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mentor Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
+            background: linear-gradient(to right, #185a9d, #43cea2); 
+            color: #fff; 
+        }
+
+        h1, h2 {
+            color: #fff; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        button {
+            background-color: #fff; 
+            color: #43cea2; 
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff; 
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Student Data for Your Mentored Students:</h2>
+
+    <!-- Personal Info Tab -->
+    <table id="personalInfoTab">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+                <th>Blood Group</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <!-- Inside your HTML table -->
+        <tbody>
+            {% for student in students_data %}
+                <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
+                    <td>{{ student[6] }}</td>
+                    <td>
+                        <button onclick="showProfile('{{ student[0] }}')">Profile</button>
+                        <button onclick="showFeedback('{{ student[0] }}')">Feedback</button>
+                        <button onclick="showFees('{{ student[0] }}')">Fees</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <script>
+
+        function showProfile(studentId) {
+            // Hide other tabs and display the profile tab
+            window.location.href = `/profile/${studentId}`;
+        }
+
+        function showFeedback(studentId) {
+            // Hide other tabs and display the feedback tab
+            window.location.href = `/feedback/${studentId}`;
+        }
+        function showFees(studentId) {
+            // Redirect to the fees page or implement logic as needed
+            window.location.href = `/fees/${studentId}`;
+        }
+
+    </script>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

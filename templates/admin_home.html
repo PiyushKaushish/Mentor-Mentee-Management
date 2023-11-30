@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: #fff; /* Set text color to white */
+        }
+
+        h1, h2 {
+            color: #fff; /* Set heading text color to white */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff; /* Set link color to white */
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #fff; /* Set button background color to white */
+            color: #43cea2; /* Set button text color to match the background */
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Mentor Data and Students:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Mentor ID</th>
+                <th>Mentor Name</th>
+                <th>Mentor Mobile</th>
+                <th>Mentor Email</th>
+                <th>Mentor Address</th>
+                <!-- Add more headers for additional mentor columns -->
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mentor, students, feedbacks in mentor_student_feedback_triples %}
+                <tr>
+                    <td>{{ mentor[0] }}</td>
+                    <td>{{ mentor[1] }}</td>
+                    <td>{{ mentor[2] }}</td>
+                    <td>{{ mentor[3] }}</td>
+                    <td>{{ mentor[4] }}</td>
+                    <!-- Add more columns for additional mentor data -->
+                    <td>
+                        <a href="/mentor_students/{{ mentor[0] }}">View Students</a>
+                        <form method="POST" action="/delete_mentor/{{ mentor[0] }}" >
+                            <button type="submit">Delete Mentor</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

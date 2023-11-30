@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mentor and Students</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: #fff; /* Set text color to white */
+        }
+
+        /* Add some basic CSS styles for the button */
+        .add-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .add-button:hover {
+            background-color: #258cd1;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        /* Hidden class to initially hide the form fields */
+        .hidden {
+            display: none;
+        }
+
+        /* Add styles for table and tab content */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        .tab-content {
+            margin-top: 20px;
+        }
+
+        /* Add styles for buttons inside table */
+        .update-fee-button {
+            background-color: #fff;
+            color: #43cea2;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .update-fee-button:hover {
+            background-color: #ddd;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Students Mentored by {{ mentor[1] }}:</h2>
+
+    <button id="addStudentButton" class="add-button" onclick="toggleAddStudentForm()">Add Student</button>
+
+    <!-- Add Student Form -->
+    <div id="addStudentForm" class="hidden">
+        <form action="/mentor_students/{{ mentor[0] }}/add_student" method="POST" style="max-width: 400px; margin: auto;">
+            <h2>Add New Student</h2>
+    
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required class="form-input"><br>
+    
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile" required class="form-input"><br>
+    
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required class="form-input"><br>
+    
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required class="form-input"><br>
+    
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required class="form-input"><br>
+    
+            <label for="bloodgp">Blood Group:</label>
+            <input type="text" id="bloodgp" name="bloodgp" required class="form-input"><br>
+    
+            <label for="program">Program:</label>
+            <input type="text" id="program" name="program" required class="form-input"><br>
+    
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" name="semester" required class="form-input"><br>
+    
+            <label for="section">Section:</label>
+            <input type="text" id="section" name="section" required class="form-input"><br>
+    
+            <label for="father_name">Father's Name:</label>
+            <input type="text" id="father_name" name="father_name" required class="form-input"><br>
+    
+            <label for="father_mobile">Father's Mobile:</label>
+            <input type="text" id="father_mobile" name="father_mobile" required class="form-input"><br>
+    
+            <label for="father_email">Father's Email:</label>
+            <input type="text" id="father_email" name="father_email" required class="form-input"><br>
+    
+            <label for="mother_name">Mother's Name:</label>
+            <input type="text" id="mother_name" name="mother_name" required class="form-input"><br>
+    
+            <label for="mother_mobile">Mother's Mobile:</label>
+            <input type="text" id="mother_mobile" name="mother_mobile" required class="form-input"><br>
+    
+            <label for="mother_email">Mother's Email:</label>
+            <input type="text" id="mother_email" name="mother_email" required class="form-input"><br>
+    
+            <input type="submit" value="Add Student" class="form-button">
+        </form>
+    </div>
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ student[1] }}</td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="showTab('personalInfo{{ student[0] }}')">Personal Info</a> |
+                        <a href="javascript:void(0);" onclick="showTab('fees{{ student[0] }}')">Fees</a> |
+                        <a href="javascript:void(0);" onclick="showTab('mentorMentee{{ student[0] }}')">Mentor-Mentee</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Personal Info Tab -->
+    {% for student in students %}
+    <div id="personalInfo{{ student[0] }}" class="tab-content hidden">
+        <h2>Personal Info: {{ student[1] }}</h2>
+        <p>Student ID: {{ student[0] }}</p>
+        <p>Mobile: {{ student[2] }}</p>
+        <p>Email: {{ student[3] }}</p>
+        <p>Address: {{ student[4] }}</p>
+        <p>Date of Birth: {{ student[5] }}</p>
+        <p>Blood Group: {{ student[6] }}</p>
+        
+        {% if student[7] %}
+            <p><strong>Program:</strong> {{ student[7] }}</p>
+            <p><strong>Semester:</strong> {{ student[8] }}</p>
+            <p><strong>Section:</strong> {{ student[9] }}</p>
+            <p><strong>Father's Name:</strong> {{ student[10] }}</p>
+            <p><strong>Father's Mobile:</strong> {{ student[11] }}</p>
+            <p><strong>Father's Email:</strong> {{ student[12] }}</p>
+            <p><strong>Mother's Name:</strong> {{ student[13] }}</p>
+            <p><strong>Mother's Mobile:</strong> {{ student[14] }}</p>
+            <p><strong>Mother's Email:</strong> {{ student[15] }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+
+<!-- Fees Tab -->
+<!-- Existing code above this -->
+<!-- Fees Tab -->
+{% for student in students %}
+    <div id="fees{{ student[0] }}" class="tab-content hidden">
+        <h2>Fees: {{ student[1] }}</h2>
+
+        <!-- Display fee details here -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Fee ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fee in fees[student[0]] %}
+                    <tr>
+                        <td>{{ fee[0] }}</td>
+                        <td>{{ fee[1] }}</td>
+                        <td>{{ fee[2] }}</td>
+                        <td>{{ fee[3] }}</td>
+                        <td>
+                            <button class="update-fee-button" onclick="toggleUpdateFeeForm('{{ student[0] }}', '{{ fee[0] }}')">Update Fee</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+<!-- Update Fee Form -->
+<div id="updateFeeForm{{ student[0] }}" class="hidden">
+    <form action="{{ url_for('update_fee') }}" method="POST">
+        <h3>Update Fee:</h3>
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required><br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" name="due_date" required><br>
+        <input type="hidden" id="std_id" name="std_id" value="{{ student[0] }}">
+        <input type="hidden" id="fee_id" name="fee_id" value="">
+        <input type="submit" value="Update Fee">
+    </form>
+</div>
+{% endfor %}
+<!-- Existing code below this -->
+
+
+
+
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.classList.add('hidden');
+            });
+
+            // Show the selected tab
+            document.getElementById(tabId).classList.remove('hidden');
+        }
+
+        function toggleAddStudentForm() {
+            var form = document.getElementById('addStudentForm');
+            form.classList.toggle('hidden');
+        }
+
+        function toggleUpdateFeeForm(studentId, feeId) {
+            var form = document.getElementById('updateFeeForm' + studentId);
+            var feeIdField = document.getElementById('fee_id');
+            feeIdField.value = feeId;
+            form.classList.toggle('hidden');
+        }
+
+        window.onload = function () {
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    alert("{{ messages[0] }}");
+                {% endif %}
+            {% endwith %}
+        };
+
+    </script>
+<br>
+<a href="/admin_home">Back to Admin Home</a>
+</body>
+</html>

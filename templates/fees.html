@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Fees</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
+            background: linear-gradient(to right, #185a9d, #43cea2); 
+            color: #fff; 
+        }
+
+        h1, h2 {
+            color: #fff; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff; 
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #fff;
+            color: #43cea2;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Student Fees:</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Fee ID</th>
+                <th>Student ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <!-- Inside your HTML table -->
+        <tbody>
+            <tr>
+                <td>{{ fees_data[0] }}</td>
+                <td>{{ fees_data[1] }}</td>
+                <td>{{ fees_data[2] }}</td>
+                <td>{{ fees_data[3] }}</td>
+                <td>{{ fees_data[4] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/mentor_home">Back to Mentor Home</a>
+
+</body>
+</html>

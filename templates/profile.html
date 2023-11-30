@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
+            background: linear-gradient(to right, #185a9d, #43cea2); 
+            color: #fff; 
+        }
+
+        h1, h2 {
+            color: #fff; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff; 
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Student Profile:</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Program</th>
+                <th>Semester</th>
+                <th>Section</th>
+                <th>Father's Name</th>
+                <th>Father's Mobile</th>
+                <th>Father's Email</th>
+                <th>Mother's Name</th>
+                <th>Mother's Mobile</th>
+                <th>Mother's Email</th>
+                <!-- Add more headers for additional profile columns -->
+            </tr>
+        </thead>
+        <!-- Inside your HTML table -->
+        <tbody>
+            <tr>
+                <td>{{ profile_data[0] }}</td>
+                <td>{{ profile_data[1] }}</td>
+                <td>{{ profile_data[2] }}</td>
+                <td>{{ profile_data[3] }}</td>
+                <td>{{ profile_data[4] }}</td>
+                <td>{{ profile_data[5] }}</td>
+                <td>{{ profile_data[6] }}</td>
+                <td>{{ profile_data[7] }}</td>
+                <td>{{ profile_data[8] }}</td>
+                <td>{{ profile_data[9] }}</td>
+                <td>{{ profile_data[10] }}</td>
+                <!-- Add more columns for additional profile data -->
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/mentor_home">Back to Mentor Home</a>
+
+</body>
+</html>

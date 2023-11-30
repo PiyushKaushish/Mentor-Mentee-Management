@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor-Mentee Connection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Add this script tag in the head section -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.2/gsap.min.js"></script>
+
+    <style>
+        body {
+            padding: 20px;
+            background: #ddd6f3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            margin-bottom: 100px; /* Adjusted margin to make space for the footer */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #ddd6f3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #faaca8, #ddd6f3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #faaca8, #ddd6f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            padding: 20px 0;
+            text-align: center;
+            color: #4b4c4d;
+        }
+
+        .footer-clean {
+            padding: 50px 0;
+            background-color: transparent; /* Set to transparent */
+            color: #4b4c4d;
+        }
+
+        .footer-clean h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .footer-clean ul {
+            padding: 0;
+            list-style: none;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .footer-clean ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-clean ul a:hover {
+            opacity: 1;
+        }
+
+        .footer-clean .item.social {
+            text-align: right;
+        }
+
+        @media (max-width: 767px) {
+            .footer-clean .item {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-clean .item.social {
+                text-align: center;
+            }
+        }
+
+        .footer-clean .item.social>a {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            margin-top: 22px;
+            color: inherit;
+            opacity: 0.75;
+        }
+
+        .footer-clean .item.social>a:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 991px) {
+            .footer-clean .item.social>a {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .footer-clean .item.social>a {
+                margin-top: 10px;
+            }
+        }
+
+        .footer-clean .copyright {
+            margin-top: 14px;
+            margin-bottom: 0;
+            font-size: 13px;
+            opacity: 0.6;
+        }
+        .content-section {
+            margin-top: 20px;
+        }
+
+        .content-section h1 {
+            margin-bottom: 20px;
+        }
+
+        .login-register-col {
+            text-align: center;
+        }
+
+        .login-register-btn {
+            width: 100%;
+            max-width: 200px;
+            margin-top: 20px;
+        }
+        .stick-figure {
+            position: absolute;
+            width: 50px;
+            height: 100px;
+            background-color: #cec2f4;
+            border-radius: 10px;
+            transform-origin: bottom center;
+            animation: comeFromSide 5s linear infinite;
+        }
+
+        @keyframes comeFromSide {
+            0%, 100% {
+                transform: translateX(-200px) rotate(0deg);
+            }
+            50% {
+                transform: translateX(200px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row content-section">
+            <div class="col-md-8 ">
+                <h1>Mentor-Mentee Connection</h1>
+                {% if username %}
+                <p>Hello, {{ username }}! <a href="/logout">Logout</a></p>
+                {% else %}
+                <p>Welcome to the Mentor-Mentee Connection platform! Connect, learn, and grow together.</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4 login-register-col">
+                {% if username %}
+                <!-- Additional content for logged-in users can be added here -->
+                {% else %}
+                <p><a href="/login" class="btn btn-primary login-register-btn">Quirky Login</a></p>
+                <p><a href="/register" class="btn btn-secondary login-register-btn">Whimsical Register</a></p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="stick-figure" style="top: 100px;"></div>
+        <div class="stick-figure" style="top: 250px;"></div>
+        <div class="stick-figure" style="top: 400px;"></div>
+    </div>
+
+
+
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social">
+                        <a href="#"><i class="icon ion-social-facebook"></i></a>
+                        <a href="#"><i class="icon ion-social-twitter"></i></a>
+                        <a href="#"><i class="icon ion-social-snapchat"></i></a>
+                        <a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Company Name © 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        // GSAP Animation
+        gsap.to("#runningChild", {
+            x: "80%",
+            duration: 5,
+            ease: "linear",
+            repeat: -1,
+            yoyo: true
+        });
+
+        gsap.to("#playfulLady", {
+            x: "80%",
+            duration: 5,
+            ease: "linear",
+            repeat: -1,
+            yoyo: true
+        });
+    </script>
+</body>
+
+</html>

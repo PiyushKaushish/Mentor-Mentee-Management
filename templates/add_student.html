@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+</head>
+<body>
+    <h1>Add Student</h1>
+    <form method="POST" action="/mentor_students/add_student">
+        <label for="student_name">Student Name:</label>
+        <input type="text" name="student_name" required><br>
+
+        <label for="mobile">Mobile:</label>
+        <input type="text" name="mobile" required><br>
+
+        <label for "email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" required><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" required><br>
+
+        <label for="bloodgp">Blood Group:</label>
+        <input type="text" name="bloodgp" required><br>
+
+        <label for="program">Program:</label>
+        <input type="text" name="program" required><br>
+
+        <label for="sem">Semester:</label>
+        <input type="text" name="sem" required><br>
+
+        <label for="sec">Section:</label>
+        <input type="text" name="sec" required><br>
+
+        <label for="mentor_id">Select Mentor:</label>
+        <select name="mentor_id">
+            <option value="">No Mentor</option>
+            {% for mentor in mentors %}
+                <option value="{{ mentor[0] }}">{{ mentor[1] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="submit" value="Add Student">
+    </form>
+    <a href="/mentor_students">Back to Mentor Students</a>
+</body>
+</html>

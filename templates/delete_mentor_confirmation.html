@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete the mentor?</h1>
+    <p>{{ mentor[1] }} will be permanently deleted.</p>
+    <form method="POST" action="/confirm_delete_mentor/{{ mentor[0] }}">
+        <button type="submit">Confirm Delete</button>
+    </form>
+    <a href="{{ url_for('admin_home') }}">Cancel</a>
+</body>
+</html>

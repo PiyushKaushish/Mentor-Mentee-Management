@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Feedback</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background: #43cea2;  
+            background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
+            background: linear-gradient(to right, #185a9d, #43cea2); 
+            color: #fff; 
+        }
+
+        h1, h2 {
+            color: #fff; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #605858;
+        }
+
+        textarea {
+            width: 100%;
+            resize: vertical; /* Allow vertical resizing of the textarea */
+        }
+
+        button {
+            background-color: #a5d696;
+            color: #43cea2;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        a, button {
+            text-decoration: none;
+            color: #fff; 
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Student Feedback:</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Feedback Text</th>
+                <th>Fees Paid</th>
+                <th>Issues</th>
+                <th>Achievements</th>
+                <th>Backlogs</th>
+                <th>Remarks</th>
+                <th>Submission Date</th>
+                <!-- Add more headers for additional feedback columns -->
+            </tr>
+        </thead>
+        <!-- Inside your HTML table -->
+        <tbody>
+            <tr>
+                <td>{{ feedback_data[0] }}</td>
+                <td>{{ feedback_data[1] }}</td>
+                <td>{{ feedback_data[2] }}</td>
+                <td>{{ feedback_data[3] }}</td>
+                <td>{{ feedback_data[4] }}</td>
+                <td>{{ feedback_data[5] }}</td>
+                <td>{{ feedback_data[6] }}</td>
+                <td>{{ feedback_data[7] }}</td>
+                <!-- Add more columns for additional feedback data -->
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Add a button to add more feedback for the current student -->
+    <button onclick="showFeedbackForm()">Add Feedback</button>
+
+    <!-- Feedback Form (initially hidden) -->
+    <form id="feedbackForm" action="/submit_feedback" method="POST" style="display: none;">
+        <label for="student_id">Student ID:</label>
+        <input type="text" id="student_id" name="student_id" ><br>
+
+        <label for="feedback_text">Feedback Text:</label>
+        <textarea id="feedback_text" name="feedback_text" rows="4" cols="50" required></textarea><br>
+
+        <label for="fees_paid">Fees Paid:</label>
+        <select id="fees_paid" name="fees_paid" required>
+            <option value="YES">Yes</option>
+            <option value="NO">No</option>
+        </select><br>
+
+        <label for="issues">Issues:</label>
+        <textarea id="issues" name="issues" rows="2" cols="50"></textarea><br>
+
+        <label for="achievements">Achievements:</label>
+        <textarea id="achievements" name="achievements" rows="2" cols="50"></textarea><br>
+
+        <label for="backlogs">Backlogs:</label>
+        <textarea id="backlogs" name="backlogs" rows="2" cols="50"></textarea><br>
+
+        <label for="remarks">Remarks:</label>
+        <textarea id="remarks" name="remarks" rows="2" cols="50"></textarea><br>
+
+        <input type="submit" value="Submit Feedback">
+    </form>
+    <br>
+    <br>
+    <a href="/mentor_home">Back to Mentor Home</a>
+
+    <script>
+        function showFeedbackForm() {
+            // Show the feedback form
+            var form = document.getElementById('feedbackForm');
+            form.style.display = 'block';
+    
+            // Set the student_id value only if it's a valid integer
+            var studentIdField = document.getElementById('student_id');
+            var studentIdValue = parseInt('{{ feedback_data[0] }}');  // Assuming the student_id is in the second position
+            if (!isNaN(studentIdValue)) {
+                studentIdField.value = studentIdValue;
+            }
+        }
+    </script>
+
+</body>
+</html>
